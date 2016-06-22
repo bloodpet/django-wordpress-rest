@@ -40,7 +40,8 @@ class WPAPILoader(object):
                 logger.exception("Must provide int site_id as an integer kwarg or in settings.")
                 raise
 
-        self.api_base_url = api_base_url or "https://public-api.wordpress.com/rest/v1.1/"
+        default_api_base_url = getattr(settings, 'WP_API_BASE_URL', "https://public-api.wordpress.com/rest/v1.1/")
+        self.api_base_url = api_base_url or default_api_base_url
 
         # useful for displaying warnings only once, etc.
         self.first_get = True
